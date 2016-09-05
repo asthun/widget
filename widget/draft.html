@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../JSFiles/Chart.js"></script>
+</head>
+<body>
+<canvas id="diagram" width="240" height="80"></canvas>
+<script>
+//Run CANVAS
+var canvas = document.getElementById('diagram');
+var ctx = canvas.getContext('2d');
+
+var p = new Array();
+
+//We create a class with a method drawing lines from the previous point
+function Point(x,y)
+{
+this.draw = function(){
+ctx.lineTo(x, canvas.height -y);
+}
+};
+
+//Create object for everyone points
+var p[0] = new Point(10, 10);
+var p[1] = new Point(20,100);
+...
+var p[10] = new Point(...,...);
+
+//After click the button, drawing diagram
+$('button').click(function(){
+ctx.beginPath();
+ctx.moveTo(0,canvas.height);
+
+for(i=0;i<10;i++){
+p[i].draw();
+}
+
+ctx.stroke();
+});
+</script>
+</body>
+</html>

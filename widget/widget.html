@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Widget</title>
+    <link rel="stylesheet" href="../graphic-style/graphic-style.css" type="text/css">
+
+    <script src="../JSFiles/Chart.js"></script>
+    <script src="../JSFiles/graphic.js"></script>
+
+</head>
+<body>
+<div class="graphic-widget-background">
+    <div>
+        <div id="graphic-widget-background-top-line-diagram"></div>
+        <div id="graphic-widget-background-bottom-line-diagram">
+            <div id="graphic-widget-background-bottom-line-diagram-background-diagram">
+                <canvas id="bckgrnd-dgrm" width="283" height="71"></canvas>
+                <script>
+                    var example = document.getElementById("bckgrnd-dgrm");
+                    var ctx = example.getContext('2d');
+                    example.width = 283;
+                    example.height = 71;
+
+
+                    for (i=0; i<250; i+=1)
+                        for (j=0; j<2; j+=1) {
+                            ctx.fillStyle = "#4daf7b";
+                            ctx.fillRect(5+i*5, j, 5, Math.floor(Math.random(61)*61));
+
+                        }
+                 </script>
+            </div>
+        </div>
+        <div id="graphic-widget-line-diagram-indication">
+            <div id="triangle-up"></div>
+            <div id="graphic-widget-line-diagram-indication-text1">
+                <span>634.39</span>
+            </div>
+            <div id="graphic-widget-line-diagram-indication-text2">
+                <span>+2.18 (3.71%)</span>
+            </div>
+         </div>
+        <div id="graphic-widget-line-diagram">
+            <canvas id="line-diagram" width="240" height="80"></canvas>
+
+            <script>
+
+                var c = document.getElementById("line-diagram");
+                var ctx = c.getContext("2d");
+                ctx.shadowBlur=5;
+                ctx.shadowColor="black";
+                ctx.strokeStyle="white";
+                ctx.beginPath();
+                ctx.lineWidth = 3;
+                ctx.lineCap = "butt";
+                ctx.moveTo(0, 80);
+                ctx.lineTo(20, 75);
+                ctx.lineTo(35, 71);
+                ctx.lineTo(45, 75);
+                ctx.lineTo(52, 71);
+                ctx.lineTo(69, 65);
+                ctx.lineTo(78, 70);
+                ctx.lineTo(89, 63);
+                ctx.lineTo(100, 60);
+                ctx.lineTo(102, 50);
+                ctx.lineTo(105, 42);
+                ctx.lineTo(130, 35);
+                ctx.lineTo(155, 30);
+                ctx.lineTo(155, 31);
+                ctx.lineTo(170, 33);
+                ctx.lineTo(193, 19);
+                ctx.lineTo(195, 18);
+                ctx.lineTo(215, 15);
+                ctx.lineTo(220, 23);
+                ctx.lineTo(235, 13);
+                ctx.lineTo(237, 7);
+                ctx.lineTo(240, 0);
+                ctx.stroke();
+            </script>
+        </div>
+
+    </div>
+
+    <div id="graphic-widget-date-place">
+        <p id="graphic-widget-date-time-indication">
+            <canvas id="time-date" width="256" height="12">.</canvas>
+            <script>
+                var c = document.getElementById("time-date");
+                var ctx=c.getContext("2d");
+
+                today = new Date();
+                var s = today.getSeconds();
+                var m = today.getMinutes();
+                var h = today.getHours();
+                var d = today.getDate();
+                var n = today.getMonth()+1;
+                var y = today.getFullYear();
+                ctx.font = "12px 'Open Sans'";
+                ctx.fillStyle = "#8e8071";
+                ctx.fillText(("Time: " + h +":" + m + ":" + s), 0, 10);
+                ctx.fillText(("Date: " + d + "/" + n + "/" + y), 80, 10);
+            </script>
+        </p>
+        <p id="graphic-widget-position-indication">Salt Lake City, Utah</p>
+    </div>
+    <div id="graphic-widget-trading">
+        <div id="graphic-widget-trading1">
+            <div id="graphic-widget-trading1-indication">
+                <p style="font-size: 18px; letter-spacing: -0.025em; display: inline">13.5 M</p>
+                <p style="font-size: 12px; letter-spacing: -0.005em; display: inline">Shares Traded</p>
+            </div>
+
+        </div>
+        <div id="graphic-widget-trading2">
+            <div id="graphic-widget-trading2-indication">
+                <p style="font-size: 18px; letter-spacing: -0.025em">28.44 B</p>
+                <p style="font-size: 12px; letter-spacing: -0.005em">Market Cap</p>
+            </div>
+
+        </div>
+    </div>
+    <div id="graphic-widget-background-bar-chart">
+        <h4 id="graphic-widget-bar-chart-header">AAPL</h4>
+           <h4 id="graphic-widget-year-changing-window-header">Yearly Change</h4>
+        <div id="graphic-widget-year-changing-window">
+            <span id="delta">0</span>%
+        </div>
+        <div id="graphic-widget-bar-chart">
+            <canvas id="my-chart" width="124" height="40"></canvas>
+            <script>
+                var example = document.getElementById("my-chart");
+                var ctx = example.getContext('2d');
+                example.width = 124;
+                example.height = 40;
+
+                for (i=0; i<9; i+=1)
+                    for (j=0; j<1; j+=1) {
+                        ctx.fillStyle = "#f6f0ec";
+                        ctx.fillRect(i * 14.5, 0, 9, 40);
+                        ctx.fillStyle = "#4daf7b";
+                        ctx.fillRect((i - 4) * 14.5, 20, 9, 40);
+                        ctx.fillStyle = "#e55f3b";
+                        ctx.fillRect(i * 14.5, 20, 9, 40);
+                    }
+            </script>
+            <script>
+                var elem = document.getElementById('graphic-widget-bar-chart');
+
+                if (elem.addEventListener) {
+                    if ('onwheel' in document) {
+                        // IE9+, FF17+
+                        elem.addEventListener("wheel", onWheel);
+                    } else if ('onmousewheel' in document) {
+                        // устаревший вариант события
+                        elem.addEventListener("mousewheel", onWheel);
+                    } else {
+                        // Firefox < 17
+                        elem.addEventListener("MozMousePixelScroll", onWheel);
+                    }
+                } else { // IE8-
+                    elem.attachEvent("onmousewheel", onWheel);
+                }
+
+
+                // Это решение предусматривает поддержку IE8-
+                function onWheel(e) {
+                    e = e || window.event;
+
+                    // deltaY, detail содержат пиксели
+                    // wheelDelta не дает возможность узнать количество пикселей
+                    // onwheel || MozMousePixelScroll || onmousewheel
+                    var delta = e.deltaY || e.detail || e.wheelDelta;
+
+                    var info = document.getElementById('delta');
+
+                    info.innerHTML = +info.innerHTML + delta;
+
+                    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+                }
+            </script>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
